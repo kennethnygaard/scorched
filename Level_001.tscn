@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Tank.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Bricks.tscn" type="PackedScene" id=2]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 10.0
+
+[node name="Level_001" type="Node"]
+
+[node name="Tank" parent="." instance=ExtResource( 1 )]
+position = Vector2( -710.209, 305.284 )
+rotation = -0.0896164
+
+[node name="Bricks2" parent="." instance=ExtResource( 2 )]
+position = Vector2( -939.769, 875.965 )
+rotation = 0.255494
+physics_material_override = SubResource( 1 )
+
+[node name="Bricks3" parent="." instance=ExtResource( 2 )]
+position = Vector2( -1815.34, 793.284 )
+rotation = -0.0570439
+physics_material_override = SubResource( 1 )
+
+[node name="Bricks" parent="." instance=ExtResource( 2 )]
+position = Vector2( 105.225, 1009.5 )
+physics_material_override = SubResource( 1 )

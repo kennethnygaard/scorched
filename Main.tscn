@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Level_001.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Camera2D.gd" type="Script" id=3]
+[ext_resource path="res://Main.gd" type="Script" id=4]
+
+[node name="Main" type="Node"]
+script = ExtResource( 4 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+rotation = -0.0442932
+current = true
+zoom = Vector2( 2, 2 )
+script = ExtResource( 3 )
+
+[node name="Zoom_timer" type="Timer" parent="Camera2D"]
+
+[node name="Level_001" parent="." instance=ExtResource( 1 )]
