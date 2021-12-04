@@ -1,0 +1,309 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://assets/Panzer IV_body.png" type="Texture" id=1]
+[ext_resource path="res://assets/PanzerIV_mid_wheel.png" type="Texture" id=2]
+[ext_resource path="res://PanzerIV.gd" type="Script" id=3]
+[ext_resource path="res://assets/panzer_front_wheel.png" type="Texture" id=4]
+[ext_resource path="res://assets/panzer_rear_wheel.png" type="Texture" id=5]
+[ext_resource path="res://assets/panzer_turret.png" type="Texture" id=6]
+[ext_resource path="res://assets/panzer_cannon.png" type="Texture" id=7]
+[ext_resource path="res://assets/progress_circle.png" type="Texture" id=8]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 37.7035
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 25.052
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 25.4578
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 25.4938
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 25.4067
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 25.5353
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 36.5782
+
+[node name="PanzerIV" type="RigidBody2D" groups=[
+"tank",
+]]
+mass = 2.0
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": "
+	"
+}
+
+[node name="Turret" type="Node2D" parent="."]
+position = Vector2( 0.430664, 20.2423 )
+
+[node name="Cannon" type="Sprite" parent="Turret"]
+position = Vector2( 9.62473, 1.35726 )
+scale = Vector2( 0.625, 0.625 )
+texture = ExtResource( 7 )
+offset = Vector2( 277.468, 4.03029 )
+
+[node name="Exit_point" type="Node2D" parent="Turret/Cannon"]
+position = Vector2( 620.499, 3.2658 )
+
+[node name="Turret_body" type="Sprite" parent="Turret"]
+position = Vector2( -118.611, -7.35124 )
+scale = Vector2( 0.625, 0.625 )
+texture = ExtResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.625, 0.625 )
+texture = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." groups=[
+"tank",
+]]
+polygon = PoolVector2Array( -331.632, 152.522, -349.588, 165.49, -347.094, 182.946, -313.913, 183.178, -281.085, 195.529, -203.077, 204.63, -91.2665, 204.955, 28.3451, 207.231, 125.205, 195.854, 191.511, 194.879, 208.738, 181.878, 218.489, 170.502, 222.714, 156.851, 236.365, 157.826, 233.115, 141.899, 215.563, 115.897, 180.481, 104.944, 178.101, 99.8663, 127.325, 99.8663, 120.252, 68.7283, 103.048, 63.0539, 48.9401, 56.7069, -113.67, 57.7553, -233.375, 58.2541, -237.094, 53.2658, -267.377, 54.757, -271.277, 60.3777, -327.485, 62.7866, -332.188, 103.853, -389.657, 144.345, -383.578, 148.13, -337.618, 144.042 )
+
+[node name="wheels" type="Node2D" parent="."]
+
+[node name="Rear_wheel" type="RigidBody2D" parent="wheels" groups=[
+"panzer_wheel",
+]]
+position = Vector2( -331.692, 177.159 )
+mass = 0.1
+
+[node name="Sprite" type="Sprite" parent="wheels/Rear_wheel"]
+scale = Vector2( 0.625, 0.625 )
+texture = ExtResource( 5 )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="wheels/Rear_wheel"]
+node_a = NodePath("../../..")
+node_b = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wheels/Rear_wheel"]
+shape = SubResource( 1 )
+
+[node name="Mid_wheel_1" type="RigidBody2D" parent="wheels" groups=[
+"panzer_wheel",
+]]
+position = Vector2( -255.914, 207.19 )
+mass = 0.3
+
+[node name="Sprite" type="Sprite" parent="wheels/Mid_wheel_1"]
+position = Vector2( 0.0294495, 0.0474548 )
+scale = Vector2( 0.625, 0.625 )
+texture = ExtResource( 2 )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="wheels/Mid_wheel_1"]
+position = Vector2( -0.67157, -0.918457 )
+node_a = NodePath("../../..")
+node_b = NodePath("..")
+softness = 0.25
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wheels/Mid_wheel_1"]
+position = Vector2( -0.601929, -1.0542 )
+shape = SubResource( 2 )
+
+[node name="Mid_wheel_2" type="RigidBody2D" parent="wheels" groups=[
+"panzer_wheel",
+]]
+position = Vector2( -202.487, 209.139 )
+mass = 0.3
+
+[node name="Sprite" type="Sprite" parent="wheels/Mid_wheel_2"]
+scale = Vector2( 0.625, 0.625 )
+texture = ExtResource( 2 )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="wheels/Mid_wheel_2"]
+position = Vector2( -0.78064, -1.34534 )
+node_a = NodePath("../../..")
+node_b = NodePath("..")
+softness = 0.1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wheels/Mid_wheel_2"]
+position = Vector2( -0.525116, -1.57535 )
+shape = SubResource( 3 )
+
+[node name="Mid_wheel_3" type="RigidBody2D" parent="wheels" groups=[
+"panzer_wheel",
+]]
+position = Vector2( -149.121, 209.209 )
+mass = 0.3
+
+[node name="Sprite" type="Sprite" parent="wheels/Mid_wheel_3"]
+scale = Vector2( 0.625, 0.625 )
+texture = ExtResource( 2 )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="wheels/Mid_wheel_3"]
+position = Vector2( -0.805374, -1.34207 )
+node_a = NodePath("../../..")
+node_b = NodePath("..")
+softness = 0.1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wheels/Mid_wheel_3"]
+position = Vector2( -0.783157, -1.43579 )
+shape = SubResource( 4 )
+
+[node name="Mid_wheel_4" type="RigidBody2D" parent="wheels" groups=[
+"panzer_wheel",
+]]
+position = Vector2( -95.368, 209.243 )
+mass = 0.3
+
+[node name="Sprite" type="Sprite" parent="wheels/Mid_wheel_4"]
+scale = Vector2( 0.625, 0.625 )
+texture = ExtResource( 2 )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="wheels/Mid_wheel_4"]
+position = Vector2( -0.819214, -1.36316 )
+node_a = NodePath("../../..")
+node_b = NodePath("..")
+softness = 0.1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wheels/Mid_wheel_4"]
+position = Vector2( -0.870804, -1.45135 )
+shape = SubResource( 5 )
+
+[node name="Mid_wheel_5" type="RigidBody2D" parent="wheels" groups=[
+"panzer_wheel",
+]]
+position = Vector2( -43.2065, 208.736 )
+mass = 0.3
+
+[node name="Sprite" type="Sprite" parent="wheels/Mid_wheel_5"]
+scale = Vector2( 0.625, 0.625 )
+texture = ExtResource( 2 )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="wheels/Mid_wheel_5"]
+position = Vector2( -0.819214, -1.36316 )
+node_a = NodePath("../../..")
+node_b = NodePath("..")
+softness = 0.1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wheels/Mid_wheel_5"]
+position = Vector2( -0.870804, -1.45135 )
+shape = SubResource( 5 )
+
+[node name="Mid_wheel_6" type="RigidBody2D" parent="wheels" groups=[
+"panzer_wheel",
+]]
+position = Vector2( 9.78493, 208.647 )
+mass = 0.3
+
+[node name="Sprite" type="Sprite" parent="wheels/Mid_wheel_6"]
+scale = Vector2( 0.625, 0.625 )
+texture = ExtResource( 2 )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="wheels/Mid_wheel_6"]
+position = Vector2( -0.819214, -1.36316 )
+node_a = NodePath("../../..")
+node_b = NodePath("..")
+softness = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wheels/Mid_wheel_6"]
+position = Vector2( -0.870804, -1.45135 )
+shape = SubResource( 5 )
+
+[node name="Mid_wheel_7" type="RigidBody2D" parent="wheels" groups=[
+"panzer_wheel",
+]]
+position = Vector2( 62.3267, 208.476 )
+mass = 0.3
+
+[node name="Sprite" type="Sprite" parent="wheels/Mid_wheel_7"]
+scale = Vector2( 0.625, 0.625 )
+texture = ExtResource( 2 )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="wheels/Mid_wheel_7"]
+position = Vector2( -0.819214, -1.36316 )
+node_a = NodePath("../../..")
+node_b = NodePath("..")
+softness = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wheels/Mid_wheel_7"]
+position = Vector2( -0.870804, -1.45135 )
+shape = SubResource( 5 )
+
+[node name="Mid_wheel_8" type="RigidBody2D" parent="wheels" groups=[
+"panzer_wheel",
+]]
+position = Vector2( 115.862, 208.862 )
+mass = 0.3
+
+[node name="Sprite" type="Sprite" parent="wheels/Mid_wheel_8"]
+position = Vector2( -0.0125504, 0.00257111 )
+scale = Vector2( 0.625, 0.625 )
+texture = ExtResource( 2 )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="wheels/Mid_wheel_8"]
+node_a = NodePath("../../..")
+node_b = NodePath("..")
+softness = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wheels/Mid_wheel_8"]
+position = Vector2( -0.686783, -1.37357 )
+shape = SubResource( 6 )
+
+[node name="Front_wheel" type="RigidBody2D" parent="wheels" groups=[
+"panzer_wheel",
+]]
+position = Vector2( 181.988, 161.498 )
+mass = 0.1
+
+[node name="Sprite" type="Sprite" parent="wheels/Front_wheel"]
+scale = Vector2( 0.625, 0.625 )
+texture = ExtResource( 4 )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="wheels/Front_wheel"]
+node_a = NodePath("../../..")
+node_b = NodePath("..")
+softness = 0.1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wheels/Front_wheel"]
+position = Vector2( -0.675751, 0 )
+shape = SubResource( 7 )
+
+[node name="DieselMeter" type="TextureProgress" parent="."]
+margin_left = -260.728
+margin_top = -184.272
+margin_right = 39.2721
+margin_bottom = 115.728
+rect_rotation = 90.0
+value = 2.0
+texture_under = ExtResource( 8 )
+texture_progress = ExtResource( 8 )
+fill_mode = 5
+tint_under = Color( 0.196078, 0.196078, 0.196078, 1 )
+tint_progress = Color( 1, 0.513726, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CannonPower" type="TextureProgress" parent="."]
+margin_left = -297.787
+margin_top = -147.414
+margin_right = 2.21295
+margin_bottom = 152.586
+rect_rotation = 90.0
+rect_scale = Vector2( 0.75, 0.75 )
+value = 2.0
+texture_under = ExtResource( 8 )
+texture_progress = ExtResource( 8 )
+fill_mode = 5
+tint_under = Color( 0.196078, 0.196078, 0.196078, 1 )
+tint_progress = Color( 0.266667, 1, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hit_area" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hit_area"]
+polygon = PoolVector2Array( -352.237, 149.067, -307.84, 188.532, -242.066, 200.59, -160.396, 204.975, 179.985, 191.272, 200.265, 181.954, 212.872, 156.193, 178.34, 103.573, 132.847, 94.8035, 130.106, 78.36, 119.692, 68.4939, 35.2817, 55.8872, 19.3864, 5.46039, -91.8815, -16.4643, -98.4589, -38.389, -177.388, -40.0334, -188.898, -8.24255, -263.99, -1.117, -266.731, 60.2721, -326.476, 64.1089, -335.246, 106.314, -350.593, 132.076 )
+
+[node name="Hit_by_missile_timer" type="Timer" parent="."]
+one_shot = true

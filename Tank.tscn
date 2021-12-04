@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/T-34.png" type="Texture" id=1]
 [ext_resource path="res://Tank.gd" type="Script" id=2]
@@ -10,26 +10,28 @@
 [ext_resource path="res://assets/front_small_wheel.png" type="Texture" id=8]
 [ext_resource path="res://assets/turret.png" type="Texture" id=9]
 [ext_resource path="res://assets/cannon.png" type="Texture" id=10]
+[ext_resource path="res://assets/audio/T34 - engine sound.mp3" type="AudioStream" id=11]
+[ext_resource path="res://assets/progress_circle.png" type="Texture" id=12]
 
-[sub_resource type="PhysicsMaterial" id=5]
+[sub_resource type="PhysicsMaterial" id=1]
 friction = 10.0
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=2]
 radius = 41.5081
+
+[sub_resource type="PhysicsMaterial" id=3]
+friction = 10.0
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 43.0652
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 43.0988
 
 [sub_resource type="PhysicsMaterial" id=6]
 friction = 10.0
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 43.0652
-
 [sub_resource type="CircleShape2D" id=7]
-radius = 43.0988
-
-[sub_resource type="PhysicsMaterial" id=4]
-friction = 10.0
-
-[sub_resource type="CircleShape2D" id=2]
 radius = 42.2858
 
 [sub_resource type="CircleShape2D" id=8]
@@ -45,17 +47,22 @@ gravity_scale = 4.0
 script = ExtResource( 2 )
 
 [node name="Turret" type="Node2D" parent="."]
+position = Vector2( -55, -61 )
 
 [node name="Cannon" type="Node2D" parent="Turret"]
 position = Vector2( -4.12302, 2.2489 )
 
 [node name="Sprite" type="Sprite" parent="Turret/Cannon"]
-position = Vector2( -220.767, -62.5945 )
+position = Vector2( -158.859, 0.972519 )
 texture = ExtResource( 10 )
 
+[node name="Exit_point" type="Node2D" parent="Turret/Cannon"]
+position = Vector2( -370.485, -7.22766 )
+
 [node name="Sprite" type="Sprite" parent="Turret"]
-position = Vector2( 23.2386, -65.2182 )
+position = Vector2( -116.056, -4.41496 )
 texture = ExtResource( 9 )
+offset = Vector2( 200, 0 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -68,7 +75,7 @@ polygon = PoolVector2Array( -162.365, 89.527, -120.57, 91.0749, -26.9179, 91.074
 "wheel",
 ]]
 position = Vector2( -116.236, 82.4292 )
-physics_material_override = SubResource( 5 )
+physics_material_override = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Big_wheel_1"]
 texture = ExtResource( 3 )
@@ -78,13 +85,13 @@ node_a = NodePath("../..")
 node_b = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Big_wheel_1"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Big_wheel_2" type="RigidBody2D" parent="." groups=[
 "wheel",
 ]]
 position = Vector2( -13.5882, 84.0927 )
-physics_material_override = SubResource( 6 )
+physics_material_override = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="Big_wheel_2"]
 texture = ExtResource( 5 )
@@ -94,7 +101,7 @@ node_a = NodePath("../..")
 node_b = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Big_wheel_2"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Big_wheel_3" type="RigidBody2D" parent="." groups=[
 "wheel",
@@ -110,7 +117,7 @@ node_b = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Big_wheel_3"]
 position = Vector2( 0.256409, 0.256378 )
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="Big_wheel_4" type="RigidBody2D" parent="." groups=[
 "wheel",
@@ -126,13 +133,13 @@ node_b = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Big_wheel_4"]
 position = Vector2( 0.256409, 0.256378 )
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="Big_wheel_5" type="RigidBody2D" parent="." groups=[
 "wheel",
 ]]
 position = Vector2( 267.661, 81.2726 )
-physics_material_override = SubResource( 4 )
+physics_material_override = SubResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="Big_wheel_5"]
 texture = ExtResource( 4 )
@@ -143,7 +150,7 @@ node_b = NodePath("../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Big_wheel_5"]
 position = Vector2( 0, -0.769135 )
-shape = SubResource( 2 )
+shape = SubResource( 7 )
 
 [node name="Rear_small_wheel" type="RigidBody2D" parent="." groups=[
 "wheel",
@@ -175,3 +182,51 @@ node_b = NodePath("..")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Front_small_wheel"]
 position = Vector2( -1.07733, -1.07735 )
 shape = SubResource( 9 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+
+[node name="Rev_timer" type="Timer" parent="AudioStreamPlayer"]
+
+[node name="DieselMeter" type="TextureProgress" parent="."]
+margin_left = 408.643
+margin_top = -313.49
+margin_right = 708.643
+margin_bottom = -13.4898
+rect_rotation = 90.0
+value = 2.0
+texture_under = ExtResource( 12 )
+texture_progress = ExtResource( 12 )
+fill_mode = 5
+tint_under = Color( 0.196078, 0.196078, 0.196078, 1 )
+tint_progress = Color( 1, 0.701961, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CannonPower" type="TextureProgress" parent="."]
+margin_left = 370.852
+margin_top = -275.255
+margin_right = 670.852
+margin_bottom = 24.7451
+rect_rotation = 90.0
+rect_scale = Vector2( 0.75, 0.75 )
+value = 2.0
+texture_under = ExtResource( 12 )
+texture_progress = ExtResource( 12 )
+fill_mode = 5
+tint_under = Color( 0.196078, 0.196078, 0.196078, 1 )
+tint_progress = Color( 0.266667, 1, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hit_area" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hit_area"]
+polygon = PoolVector2Array( -200.851, 52.2592, -156.217, 78.2634, 342.133, 80.5922, 355.33, 72.4416, 361.54, 57.3048, 345.626, 19.2687, 277.811, -35.5875, 144.387, -38.908, 114.201, -89.319, 73.7515, -97.7712, -66.0109, -85.6967, -84.1227, -56.416, -85.3301, -25.3242, -168.342, 19.6534, -195.805, 24.3143, -205.12, 38.2867 )
+
+[node name="Hit_by_missile_timer" type="Timer" parent="."]
+one_shot = true

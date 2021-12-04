@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Terrain_modules/landscape/landscape_003.png" type="Texture" id=1]
+[ext_resource path="res://Terrain_modules/Base_terrain_module.gd" type="Script" id=2]
+
+[node name="Base_Terrain_module" type="StaticBody2D" groups=[
+"ground",
+]]
+collision_layer = 524289
+collision_mask = 524289
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -363.654, -2213.32, -289.543, -2210.18, -116.271, -2143.38, 53.6752, -2126.5, 163.038, -2069.22, 298.439, -2070.26, 409.885, -2024.43, 490.084, -2006.72, 809.84, -1861.95, 959.823, -1801.54, 960.981, 2508.04, -959.519, 2501.8, -961.529, -2375.08, -738.38, -2303.08, -676.796, -2276.99, -627.737, -2272.81 )
+
+[node name="Stop trajectory_rotation_area" type="Area2D" parent="."]
+visible = false
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Stop trajectory_rotation_area"]
+polygon = PoolVector2Array( -363.654, -2213.32, -289.543, -2210.18, -116.271, -2143.38, 53.6752, -2126.5, 163.038, -2069.22, 298.439, -2070.26, 409.885, -2024.43, 490.084, -2006.72, 809.84, -1861.95, 959.823, -1801.54, 960.981, 2508.04, -959.519, 2501.8, -961.529, -2375.08, -738.38, -2303.08, -676.796, -2276.99, -627.737, -2272.81 )
+
+[node name="Explode_area" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Explode_area"]
+polygon = PoolVector2Array( -363.654, -2213.32, -289.543, -2210.18, -116.271, -2143.38, 53.6752, -2126.5, 163.038, -2069.22, 298.439, -2070.26, 409.885, -2024.43, 490.084, -2006.72, 809.84, -1861.95, 959.823, -1801.54, 960.981, 2508.04, -959.519, 2501.8, -961.529, -2375.08, -738.38, -2303.08, -676.796, -2276.99, -627.737, -2272.81 )
+
+[node name="Left__top_point" type="Node2D" parent="."]
+position = Vector2( -960, -2371.63 )
+
+[node name="Right_top_point" type="Node2D" parent="."]
+position = Vector2( 960, -1803.72 )
+
+[node name="Tank_start_point" type="Node2D" parent="."]
+position = Vector2( 0.711186, -2706.18 )

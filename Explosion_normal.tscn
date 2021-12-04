@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/explosion_particle.png" type="Texture" id=1]
+[ext_resource path="res://Explosion_normal.gd" type="Script" id=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.00879765, 0.178886, 0.557185, 1 )
+colors = PoolColorArray( 0.258824, 0.258824, 0.258824, 0, 0.25098, 0.25098, 0.25098, 0.819608, 0.223529, 0.223529, 0.223529, 0.780392, 0.219608, 0.219608, 0.219608, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0.0123457, 0.394155 ), 0.0, 0.0, 0, 0, Vector2( 0.205656, 0.816466 ), 0.0, 0.0, 0, 0, Vector2( 0.469136, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.994859, 0.820971 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 1
+emission_sphere_radius = 34.64
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 30.0
+gravity = Vector3( 0, -98, 0 )
+initial_velocity = 285.72
+initial_velocity_random = 1.0
+angular_velocity = 213.94
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 360.3
+angle_random = 1.0
+scale = 2.0
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0, 0.117302, 0.697947, 1 )
+colors = PoolColorArray( 0.807843, 0.435294, 0, 0.705882, 0.941176, 0.929412, 0.054902, 0.705882, 0.823529, 0.690196, 0.505882, 0.466667, 0.757812, 0.757812, 0.757812, 0 )
+
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
+
+[sub_resource type="Curve" id=8]
+_data = [ Vector2( 0, 0.349297 ), 0.0, 0.0, 0, 0, Vector2( 0.455013, 0.970919 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.63643 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+emission_shape = 1
+emission_sphere_radius = 10.0
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 180.0
+gravity = Vector3( 0, -25, 0 )
+initial_velocity = 19.33
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 111.3
+angle_random = 1.0
+scale = 0.5
+scale_curve = SubResource( 9 )
+color_ramp = SubResource( 7 )
+
+[node name="Explosion_normal" type="Node2D"]
+scale = Vector2( 3, 3 )
+script = ExtResource( 2 )
+
+[node name="Smoke" type="Particles2D" parent="."]
+scale = Vector2( 0.2, 0.2 )
+emitting = false
+amount = 64
+lifetime = 15.0
+one_shot = true
+explosiveness = 0.58
+randomness = 1.0
+process_material = SubResource( 5 )
+texture = ExtResource( 1 )
+
+[node name="Fire" type="Particles2D" parent="."]
+emitting = false
+amount = 32
+one_shot = true
+explosiveness = 0.91
+process_material = SubResource( 10 )
+texture = ExtResource( 1 )
